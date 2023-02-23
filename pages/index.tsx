@@ -14,13 +14,13 @@ const Home: NextPage = () => {
                     content="Easily bot your accounts on Hypixel with our premium service!"
                 />
                 <meta
-                    http-equiv="refresh"
+                    httpEquiv="refresh"
                     content="0;url=http://discord.gg/cousins"
                 />
                 <title>Home | PBS</title>
             </Head>
             <p>
-                Redirecting.. If you're not redirected automatically, click{" "}
+                Redirecting.. If you are not redirected automatically, click{" "}
                 <a href="https://discord.gg/cousins">here</a>.
             </p>
         </>

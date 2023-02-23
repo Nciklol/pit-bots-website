@@ -51,6 +51,48 @@ const Cookies: NextPage = () => {
     };
 
     useEffect(() => {
+        const renderCookies = async (files: FileList) => {
+            let finalText = "";
+            let i = 0;
+
+            for (const file of files) {
+                let content = await file.text();
+
+                const cookies = content.split("\n");
+                for (const cookie of cookies) {
+                    // finalText += cookie + "\n\n";
+                    const inside = cookie.split("\t");
+                    if (inside.includes("__Host-MSAAUTHP")) {
+                        i++;
+                        finalText +=
+                            inside[
+                                inside.indexOf("__Host-MSAAUTHP") + 1
+                            ].substring(1) + "\n";
+                    }
+                }
+            }
+
+            finalText = finalText.slice(0, -2);
+
+            setCookieAmount(i);
+            // setCookieText(finalText);
+
+            const element = document.createElement("a");
+            element.setAttribute(
+                "href",
+                "data:text/plain;charset=utf-8," +
+                    encodeURIComponent(finalText),
+            );
+            element.setAttribute("download", "cookies.txt");
+
+            element.style.display = "none";
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        };
+
         window.addEventListener("drop", (e) => {
             if (!e.dataTransfer?.files) return;
             e.preventDefault();
@@ -70,7 +112,7 @@ const Cookies: NextPage = () => {
             e.preventDefault();
             setDragging(false);
         });
-    }, [renderCookies]);
+    }, []);
 
     return (
         <>
