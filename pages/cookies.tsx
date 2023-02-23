@@ -70,7 +70,7 @@ const Cookies: NextPage = () => {
             e.preventDefault();
             setDragging(false);
         });
-    }, []);
+    }, [renderCookies]);
 
     return (
         <>
