@@ -1,9 +1,30 @@
 import { NextPage } from "next";
+import Head from "next/head";
 
 const Home: NextPage = () => {
-  return (
-    <p className="text-center text-green-500 font-bold">Welcome to Tailwind CSS + NextJS ❤️</p>
-  )
-}
+    return (
+        <>
+            <Head>
+                <meta
+                    property="og:title"
+                    content="Pit Bots - Professional Botting"
+                />
+                <meta
+                    property="og:description"
+                    content="Easily bot your accounts on Hypixel with our premium service!"
+                />
+                <meta
+                    http-equiv="refresh"
+                    content="0;url=http://discord.gg/cousins"
+                />
+                <title>Home | PBS</title>
+            </Head>
+            <p>
+                Redirecting.. If you're not redirected automatically, click{" "}
+                <a href="https://discord.gg/cousins">here</a>.
+            </p>
+        </>
+    );
+};
 
 export default Home;
