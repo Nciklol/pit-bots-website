@@ -16,21 +16,24 @@ const Cookies: NextPage = () => {
             let content = await file.text();
 
             const cookies = content.split("\n");
-            i += cookieAmount;
             for (const cookie of cookies) {
                 // finalText += cookie + "\n\n";
                 const inside = cookie.split("\t");
+                if (!inside[0].endsWith(".live.com")) return;
                 if (inside.includes("__Host-MSAAUTHP")) {
                     i++;
-                    finalText +=
-                        inside[inside.indexOf("__Host-MSAAUTHP") + 1].substring(
-                            1,
-                        ) + "\n";
+                    finalText += content + "\n\n";
                 }
             }
         }
 
         finalText = finalText.slice(0, -2);
+
+        const set = new Set();
+
+        finalText.split("\n\n").forEach((x) => set.add(x.trim()));
+
+        finalText = Array.from(set).join("\n\n\n");
 
         setCookieAmount(i);
         // setCookieText(finalText);
@@ -62,17 +65,23 @@ const Cookies: NextPage = () => {
                 for (const cookie of cookies) {
                     // finalText += cookie + "\n\n";
                     const inside = cookie.split("\t");
+                    console.log(inside);
                     if (inside.includes("__Host-MSAAUTHP")) {
                         i++;
-                        finalText +=
-                            inside[
-                                inside.indexOf("__Host-MSAAUTHP") + 1
-                            ].substring(1) + "\n";
+                        finalText += content + "\n\n";
                     }
                 }
             }
 
             finalText = finalText.slice(0, -2);
+
+            const set = new Set();
+
+            finalText.split("\n\n").forEach((x) => set.add(x.trim()));
+
+            finalText = Array.from(set).join("\n\n\n");
+
+            console.log(finalText);
 
             setCookieAmount(i);
             // setCookieText(finalText);
@@ -166,6 +175,7 @@ const Cookies: NextPage = () => {
                                     renderCookies(files);
                                 }
                             }}
+                            multiple
                         ></input>
                     </div>
                 </div>
