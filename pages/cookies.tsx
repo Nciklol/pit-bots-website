@@ -10,21 +10,14 @@ const Cookies: NextPage = () => {
 
     const renderCookies = async (files: FileList) => {
         let finalText = "";
-        let i = 0;
+        let i = files.length;
 
         for (const file of files) {
             let content = await file.text();
 
             const cookies = content.split("\n");
-            for (const cookie of cookies) {
-                // finalText += cookie + "\n\n";
-                const inside = cookie.split("\t");
-                if (!inside[0].endsWith(".live.com")) return;
-                if (inside.includes("__Host-MSAAUTHP")) {
-                    i++;
-                    finalText += content + "\n\n";
-                }
-            }
+
+            finalText += content + "\n\n";
         }
 
         finalText = finalText.slice(0, -2);
@@ -56,21 +49,13 @@ const Cookies: NextPage = () => {
     useEffect(() => {
         const renderCookies = async (files: FileList) => {
             let finalText = "";
-            let i = 0;
+            let i = files.length;
 
             for (const file of files) {
                 let content = await file.text();
 
                 const cookies = content.split("\n");
-                for (const cookie of cookies) {
-                    // finalText += cookie + "\n\n";
-                    const inside = cookie.split("\t");
-                    console.log(inside);
-                    if (inside.includes("__Host-MSAAUTHP")) {
-                        i++;
-                        finalText += content + "\n\n";
-                    }
-                }
+                finalText += content + "\n\n";
             }
 
             finalText = finalText.slice(0, -2);
